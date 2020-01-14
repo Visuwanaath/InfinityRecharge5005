@@ -8,11 +8,9 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Drivetrain extends SubsystemBase {
   private Spark rightMotor = new Spark(0);
   private Spark leftMotor = new Spark(1);
-  private DifferentialDrive drive1 = new DifferentialDrive(leftMotor, rightMotor);
   public Drivetrain() {
   }
 public void Go(double rightTrigger,double leftTrigger,double leftStickAxis){
@@ -27,7 +25,13 @@ public void Go(double rightTrigger,double leftTrigger,double leftStickAxis){
   }
 }
 public void ArcDrive(double GoSpeed, double Turn){
-  drive1.arcadeDrive(GoSpeed, Turn);
+  if(GoSpeed != 0 ){
+    leftMotor.set(GoSpeed + Turn);
+    rightMotor.set(GoSpeed - Turn);
+  }else{
+    leftMotor.set(0.5*(GoSpeed + Turn));
+    rightMotor.set(0.5*(GoSpeed - Turn));
+  }
 }
 @Override
 public void periodic() {

@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LineUpTarget extends CommandBase {
   private final Drivetrain m_Drivetrain;
   double TargetDetected;
@@ -40,15 +41,20 @@ public class LineUpTarget extends CommandBase {
     STEER_K = 0.03;                    // how hard to turn toward the target
     DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
     DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
-    MAX_DRIVE = 0.7;                   // Simple speed limit so we don't drive too fast
+    MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
+    SmartDashboard.putNumber("Steer_K", STEER_K);
+    SmartDashboard.putNumber("Drive_K", DRIVE_K);
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(TargetDetected == 1){
+      STEER_K = SmartDashboard.getNumber("Steer_K",0.03);
+      DRIVE_K = SmartDashboard.getNumber("Drive_K",0.26);
       double OffsetX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       double AreaOfTarget = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+      System.out.println(GetDistance(4, 71, OffsetY));
       if(OffsetX != 0){
       steer_cmd = OffsetX * STEER_K;
       drive_cmd = (DESIRED_TARGET_AREA - AreaOfTarget) * DRIVE_K;
@@ -57,6 +63,7 @@ public class LineUpTarget extends CommandBase {
         drive_cmd = MAX_DRIVE;
       }
       m_Drivetrain.ArcDrive(drive_cmd,steer_cmd);
+
       }else{
         EndNow = true;
         m_Drivetrain.Go(0, 0, 0);
@@ -70,6 +77,11 @@ public class LineUpTarget extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_Drivetrain.Go(0, 0, 0);
+  }
+  public double GetDistance(double LimeHeight,double TargetHeight, double Angle){
+    Angle = Math.toRadians(Angle);
+    double distance = (TargetHeight - LimeHeight) /(Math.tan(Angle));
+    return distance;
   }
   // Returns true when the command should end.
   @Override

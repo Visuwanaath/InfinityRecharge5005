@@ -29,8 +29,10 @@ public void ArcDrive(double GoSpeed, double Turn){
     leftMotor.set(GoSpeed + Turn);
     rightMotor.set(GoSpeed - Turn);
   }else{
-    leftMotor.set(0.5*(GoSpeed + Turn));
-    rightMotor.set(0.5*(GoSpeed - Turn));
+    //leftMotor.set(0.5*(GoSpeed + Turn));
+    //rightMotor.set(0.5*(GoSpeed - Turn));
+    leftMotor.set(GoSpeed + Turn);
+    rightMotor.set(GoSpeed - Turn);
   }
 }
 @Override

@@ -35,19 +35,20 @@ public class SpinUntilColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+  double spinSpeed = 0.5;
   currentColor = SmartDashboard.getString("Detected Color", "NoU");
   if(currentColor.equals("NoU") == false){
     System.out.println(currentColor);
     if(gameData.equals("B")){
       if(currentColor.equals("Blue") == false){
-        m_Spinner.setArmSpeed(1);
+        m_Spinner.setArmSpeed(spinSpeed);
       }else{
         End = true;
         m_Spinner.setArmSpeed(0);
       }
     }else if(gameData.equals("G")){
       if(currentColor.equals("Green") == false){
-        m_Spinner.setArmSpeed(1);
+        m_Spinner.setArmSpeed(spinSpeed);
       }else{
         End = true;
         m_Spinner.setArmSpeed(0);
@@ -55,14 +56,14 @@ public class SpinUntilColor extends CommandBase {
     }else if(gameData.equals("R")){
       System.out.println("testworked");
       if(currentColor.equals("Red") == false){
-        m_Spinner.setArmSpeed(1);
+        m_Spinner.setArmSpeed(spinSpeed);
       }else{
         End = true;
         m_Spinner.setArmSpeed(0);
       }
     }else if(gameData.equals("Y")){
       if(currentColor.equals("Yellow") == false){
-        m_Spinner.setArmSpeed(1);
+        m_Spinner.setArmSpeed(spinSpeed);
       }else{
         End = true;
         m_Spinner.setArmSpeed(0);

@@ -28,7 +28,7 @@ public class Spinner extends SubsystemBase {
   public Spinner() {
   }
   public void setArmSpeed(double speed){
-    spinnerArm.set((speed/2));
+    spinnerArm.set(speed);
   }
   @Override
   public void periodic() {

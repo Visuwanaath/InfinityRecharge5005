@@ -33,11 +33,11 @@ public class LineUpTarget extends CommandBase {
   public LineUpTarget(Drivetrain subsystem) {
     m_Drivetrain = subsystem;
     addRequirements(m_Drivetrain);
-    STEER_K = 0.03;                    // how hard to turn toward the target
-    DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
+    STEER_K = 0.07;                    // how hard to turn toward the target
+    DRIVE_K = 0.07;                    // how hard to drive fwd toward the target
     DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
     MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
-    Desired_distance = 144;
+    Desired_distance = 84;
     // Use addRequirements() here to declare subsystem dependencies.
   } 
   // Called when the command is initially scheduled.
@@ -59,7 +59,7 @@ public class LineUpTarget extends CommandBase {
       double OffsetX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       double MIN_DRIVE = 0.25;
-      actual_Distance= GetDistance(20, 72, OffsetY, 35);
+      actual_Distance= GetDistance(20, 88, OffsetY, 35);
       System.out.println("Distance: " + actual_Distance);
       SmartDashboard.putNumber("Actual Distance", actual_Distance);
       if(OffsetX != 0){
@@ -68,23 +68,25 @@ public class LineUpTarget extends CommandBase {
       if (drive_cmd > MAX_DRIVE)
       {
         drive_cmd = MAX_DRIVE;
-      }
-      if(drive_cmd >0){
-        if(drive_cmd < MIN_DRIVE){
-          drive_cmd = MIN_DRIVE;
+      }/*
+      if(drive_cmd != 0){
+        if(drive_cmd >0){
+          if(drive_cmd < MIN_DRIVE){
+            drive_cmd = MIN_DRIVE;
+          }
+        }else{
+          if(drive_cmd > (-1 * MIN_DRIVE)){
+            drive_cmd = (-1 * MIN_DRIVE);
+          }
         }
-      }else{
-        if(drive_cmd > (-1 * MIN_DRIVE)){
-          drive_cmd = (-1 * MIN_DRIVE);
-        }
-      }
+      }*/
       m_Drivetrain.ArcDrive(drive_cmd,steer_cmd);
       }else{
         EndNow = true;
         m_Drivetrain.Go(0, 0, 0);
       }
     }else if(TargetDetected == 0){
-      m_Drivetrain.ArcDrive(0,0.5);
+      m_Drivetrain.Go(0, 0, 1);
     }
   }
   // Called once the command ends or is interrupted.

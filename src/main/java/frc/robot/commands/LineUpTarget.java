@@ -23,6 +23,8 @@ public class LineUpTarget extends CommandBase {
   double MAX_DRIVE;
   double steer_cmd;
   double drive_cmd;
+  double Desired_distance;
+  double actual_Distance;
   /**
    * Creates a new LineUpTarget.
    */
@@ -31,6 +33,11 @@ public class LineUpTarget extends CommandBase {
   public LineUpTarget(Drivetrain subsystem) {
     m_Drivetrain = subsystem;
     addRequirements(m_Drivetrain);
+    STEER_K = 0.03;                    // how hard to turn toward the target
+    DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
+    DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
+    MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
+    Desired_distance = 144;
     // Use addRequirements() here to declare subsystem dependencies.
   } 
   // Called when the command is initially scheduled.
@@ -38,12 +45,9 @@ public class LineUpTarget extends CommandBase {
   public void initialize() {
     EndNow = false;
     TargetDetected = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-    STEER_K = 0.03;                    // how hard to turn toward the target
-    DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
-    DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
-    MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
     SmartDashboard.putNumber("Steer_K", STEER_K);
     SmartDashboard.putNumber("Drive_K", DRIVE_K);
+    SmartDashboard.putNumber("Desired Distance", Desired_distance);
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -51,19 +55,21 @@ public class LineUpTarget extends CommandBase {
     if(TargetDetected == 1){
       STEER_K = SmartDashboard.getNumber("Steer_K",0.03);
       DRIVE_K = SmartDashboard.getNumber("Drive_K",0.26);
+      Desired_distance = SmartDashboard.getNumber("Desired Distance",10);
       double OffsetX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-      double AreaOfTarget = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-      System.out.println(GetDistance(4, 71, OffsetY));
+      double MIN_DRIVE = 0.25;
+      actual_Distance= GetDistance(20, 72, OffsetY, 35);
+      System.out.println("Distance: " + actual_Distance);
+      SmartDashboard.putNumber("Actual Distance", actual_Distance);
       if(OffsetX != 0){
       steer_cmd = OffsetX * STEER_K;
-      drive_cmd = (DESIRED_TARGET_AREA - AreaOfTarget) * DRIVE_K;
+      drive_cmd = (actual_Distance- Desired_distance) * DRIVE_K;
       if (drive_cmd > MAX_DRIVE)
       {
         drive_cmd = MAX_DRIVE;
       }
       m_Drivetrain.ArcDrive(drive_cmd,steer_cmd);
-
       }else{
         EndNow = true;
         m_Drivetrain.Go(0, 0, 0);
@@ -78,7 +84,8 @@ public class LineUpTarget extends CommandBase {
   public void end(boolean interrupted) {
     m_Drivetrain.Go(0, 0, 0);
   }
-  public double GetDistance(double LimeHeight,double TargetHeight, double Angle){
+  public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){
+    Angle = Angle + LimelightAngle;
     Angle = Math.toRadians(Angle);
     double distance = (TargetHeight - LimeHeight) /(Math.tan(Angle));
     return distance;

@@ -23,7 +23,7 @@ public class RobotContainer {
   private final Drivetrain m_Drivetrain = new Drivetrain();
   private final Spinner m_Spinner = new Spinner();
   //private final Zucc m_Zucc = new Zucc();
-  //private final Chucc m_Chucc = new Chucc();
+  private final Chucc m_Chucc = new Chucc();
   //private final LEDS m_Leds = new LEDS();
   private Joystick controller1 = new Joystick(0);
   /**
@@ -44,8 +44,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(controller1,4).whenPressed(new SpinForRotations(m_Spinner,() -> 30));
     new JoystickButton(controller1,3).whenPressed(new SpinUntilColor(m_Spinner));
-    new JoystickButton(controller1,2).whileHeld(new LineUpTarget(m_Drivetrain));
-    new JoystickButton(controller1,5).whenPressed(new TestGroup(m_Drivetrain));
+    new JoystickButton(controller1,2).whileHeld(new LineUpTarget(m_Drivetrain,true));
+    new JoystickButton(controller1,5).whenPressed(new ChuccBall(m_Chucc));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

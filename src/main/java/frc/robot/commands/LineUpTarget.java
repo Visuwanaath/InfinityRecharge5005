@@ -25,15 +25,18 @@ public class LineUpTarget extends CommandBase {
   double drive_cmd;
   double Desired_distance;
   double actual_Distance;
+  boolean m_DriveToDistance;
   /**
    * Creates a new LineUpTarget.
    */
    //IMPORT LINE BELOW FOR ACCESSSING STUFF FROM LIMELIGHT
    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("<variablename>").getDouble(0);
-  public LineUpTarget(Drivetrain subsystem) {
+  public LineUpTarget(Drivetrain subsystem,boolean DriveToDistance) {
     m_Drivetrain = subsystem;
     addRequirements(m_Drivetrain);
-    STEER_K = 0.07;                    // how hard to turn toward the target
+    m_DriveToDistance = DriveToDistance;
+    //steer was 0.07
+    STEER_K = 0.05;                    // how hard to turn toward the target
     DRIVE_K = 0.07;                    // how hard to drive fwd toward the target
     DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
     MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
@@ -53,12 +56,12 @@ public class LineUpTarget extends CommandBase {
   @Override
   public void execute() {
     if(TargetDetected == 1){
-      STEER_K = SmartDashboard.getNumber("Steer_K",0.03);
-      DRIVE_K = SmartDashboard.getNumber("Drive_K",0.26);
-      Desired_distance = SmartDashboard.getNumber("Desired Distance",10);
       double OffsetX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       double MIN_DRIVE = 0.25;
+      if(m_DriveToDistance == false){
+        DRIVE_K = 0;
+      }
       actual_Distance= GetDistance(20, 88, OffsetY, 35);
       System.out.println("Distance: " + actual_Distance);
       SmartDashboard.putNumber("Actual Distance", actual_Distance);
@@ -68,7 +71,8 @@ public class LineUpTarget extends CommandBase {
       if (drive_cmd > MAX_DRIVE)
       {
         drive_cmd = MAX_DRIVE;
-      }/*
+      }
+      /*
       if(drive_cmd != 0){
         if(drive_cmd >0){
           if(drive_cmd < MIN_DRIVE){

@@ -21,6 +21,6 @@ public class TestGroup extends SequentialCommandGroup {
   public TestGroup(Drivetrain drivetrain) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new MoveForTime(drivetrain, () ->0.5,() -> 0).withTimeout(3),new LineUpTarget(drivetrain).withTimeout(20));
+    super(new MoveForTime(drivetrain, () ->0.5,() -> 0).withTimeout(3),new LineUpTarget(drivetrain,true).withTimeout(20));
   }
 }

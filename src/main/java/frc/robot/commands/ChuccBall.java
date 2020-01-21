@@ -14,8 +14,10 @@ public class ChuccBall extends CommandBase {
   private final Chucc m_Chucc;
   double TargetDetected;
   double Distance;
-  public ChuccBall(Chucc subsystem){
+  boolean m_Cutoff;
+  public ChuccBall(Chucc subsystem, boolean Cutoff){
     // Use addRequirements() here to declare subsystem dependencies.
+    m_Cutoff = Cutoff;
     m_Chucc = subsystem;
   }
 
@@ -32,7 +34,7 @@ public class ChuccBall extends CommandBase {
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       Distance= GetDistance(20, 88, OffsetY, 35);
       //Find Relation between distance and speed and implement here
-      m_Chucc.ChuccBall(0.7, 0.7);
+      m_Chucc.ChuccBall(1,1);
     }else{
       m_Chucc.ChuccBall(0.5,0.5);
     }
@@ -46,6 +48,9 @@ public class ChuccBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    if(m_Cutoff){
+      m_Chucc.ChuccBall(0, 0);
+    }
   }
 
   // Returns true when the command should end.

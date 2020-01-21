@@ -72,18 +72,6 @@ public class LineUpTarget extends CommandBase {
       {
         drive_cmd = MAX_DRIVE;
       }
-      /*
-      if(drive_cmd != 0){
-        if(drive_cmd >0){
-          if(drive_cmd < MIN_DRIVE){
-            drive_cmd = MIN_DRIVE;
-          }
-        }else{
-          if(drive_cmd > (-1 * MIN_DRIVE)){
-            drive_cmd = (-1 * MIN_DRIVE);
-          }
-        }
-      }*/
       m_Drivetrain.ArcDrive(drive_cmd,steer_cmd);
       }else{
         EndNow = true;

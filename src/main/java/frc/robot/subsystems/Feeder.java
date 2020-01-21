@@ -9,18 +9,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Spark;
-public class Zucc extends SubsystemBase {
-  private Spark Zuccyboi1 = new Spark(4);
-  /**
-   * Creates a new Zucc.
-   */
-  public Zucc() {
+public class Feeder extends SubsystemBase {
+  public Spark Feeder = new Spark(3);
+  public Feeder() {
 
   }
-  public void ZuccBall(double speed){
-    Zuccyboi1.set(speed);
+  public void FeedBall(double speed){
+    Feeder.set(speed);
   }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

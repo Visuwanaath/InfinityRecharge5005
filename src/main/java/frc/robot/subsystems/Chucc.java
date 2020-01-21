@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Spark;
 public class Chucc extends SubsystemBase {
-  private Spark Chuccyboi1 = new Spark(6);
+  private Spark Chuccyboi1 = new Spark(2);
   private Spark Chuccyboi2 = new Spark(7);
   /**
    * Creates a new Chucc.

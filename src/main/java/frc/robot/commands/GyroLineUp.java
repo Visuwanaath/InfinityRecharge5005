@@ -11,37 +11,36 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import frc.robot.subsystems.Gyro;
 public class GyroLineUp extends CommandBase {
   private final Drivetrain m_Drivetrain;
   Double m_DesiredAngle;
-	private static SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
-  private ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
-  boolean m_Reset;
   boolean End;
+  boolean m_Reset = false;
+  private final Gyro m_Gyro;
   /**
    * Creates a new GyroLineUp.
    */
-  public GyroLineUp(Drivetrain subsystem, DoubleSupplier DesiredAngle) {
+  public GyroLineUp(Drivetrain subsystem, Gyro subsystemGyro,DoubleSupplier DesiredAngle,boolean ResetGyro) {
     m_Drivetrain = subsystem;
     m_DesiredAngle = DesiredAngle.getAsDouble();
+    m_Gyro = subsystemGyro;
+    m_Reset = ResetGyro;
     addRequirements(m_Drivetrain);
+    addRequirements(m_Gyro);
   }
-
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     End = false;
   }
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(m_Reset == false){
       double kP= 0.07;
-      double CurrentAngle = m_gyro.getAngle();
+      double CurrentAngle = m_Gyro.GetGyroAngle();
       double turningValue = (m_DesiredAngle - CurrentAngle) * kP;
       if(turningValue > 0.5){
         turningValue = 0.5;
@@ -59,9 +58,11 @@ public class GyroLineUp extends CommandBase {
           End = true;
         }
       }
+    }else{
+      m_Gyro.ResetGyro();
+      End = true;
     }
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

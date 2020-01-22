@@ -9,16 +9,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Feeder;
-import frc.robot.subsystems.Zucc;
 import frc.robot.subsystems.Chucc;
+import frc.robot.subsystems.Gyro;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TestGroup extends SequentialCommandGroup {
-  public TestGroup(Drivetrain drivetrain,Feeder subsystem1,Chucc subsystem2,Zucc subsystem3) {
+  public TestGroup(Drivetrain subsystemDrivetrain,Feeder subsystemFeeder,Chucc subsystemChucc,Gyro subsystemGyro) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new MoveForTime(drivetrain, () ->-0.5,() -> 0).withTimeout(0.5),new ChuccBall(subsystem2,false).withTimeout(0.1),new LineUpTarget(drivetrain,true).withTimeout(7),
-    new FeedBall(subsystem1, () -> 1).withTimeout(3.5),new ChuccBall(subsystem2, true).withTimeout(0.1),new GyroLineUp(drivetrain,() -> 180));
+    super(
+    new MoveForTime(subsystemDrivetrain, () ->-0.5,() -> 0).withTimeout(0.5),
+    new ChuccBall(subsystemChucc,false).withTimeout(0.1),
+    new GyroLineUp(subsystemDrivetrain,subsystemGyro,() -> 0,true),
+    new LineUpTarget(subsystemDrivetrain,true).withTimeout(3),
+    new FeedBall(subsystemFeeder, () -> 1).withTimeout(3.5),
+    new ChuccBall(subsystemChucc, true).withTimeout(0.1),
+    new GyroLineUp(subsystemDrivetrain,subsystemGyro,() -> 0,false).withTimeout(5)
+    );
   }
 }

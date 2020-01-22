@@ -16,8 +16,6 @@ import frc.robot.subsystems.Gyro;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class TestGroup extends SequentialCommandGroup {
   public TestGroup(Drivetrain subsystemDrivetrain,Feeder subsystemFeeder,Chucc subsystemChucc,Gyro subsystemGyro) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
     super(
     new MoveForTime(subsystemDrivetrain, () ->-0.5,() -> 0).withTimeout(0.5),
     new ChuccBall(subsystemChucc,false).withTimeout(0.1),

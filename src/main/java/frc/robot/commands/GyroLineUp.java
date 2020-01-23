@@ -39,17 +39,18 @@ public class GyroLineUp extends CommandBase {
   @Override
   public void execute() {
     if(m_Reset == false){
-      double kP= 0.07;
+      double kP= -0.07;
       double CurrentAngle = m_Gyro.GetGyroAngle();
-      double turningValue = (m_DesiredAngle - CurrentAngle) * kP;
+      double turningValue = (CurrentAngle - m_DesiredAngle) * kP;
       if(turningValue > 0.5){
         turningValue = 0.5;
       }else if(turningValue < -0.5){
-        turningValue = 0.5;
+        turningValue = -0.5;
       }
       m_Drivetrain.ArcDrive(0,turningValue);
       System.out.println("Angle = " + CurrentAngle);
-      double Leniency = 5;
+      System.out.println("Desired Angle = " + m_DesiredAngle);
+      double Leniency = 3;
       double DesiredWithLeniencyMax = m_DesiredAngle + Leniency;
       double DesiredWithLeniencyMin = m_DesiredAngle - Leniency;
       if(CurrentAngle < DesiredWithLeniencyMax){

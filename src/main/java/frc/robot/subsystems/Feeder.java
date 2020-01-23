@@ -9,8 +9,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Victor;
 public class Feeder extends SubsystemBase {
-  public Spark Feeder = new Spark(3);
+  public Victor Feeder = new Victor(3);
   public Feeder() {
 
   }

@@ -17,7 +17,7 @@ import frc.robot.subsystems.Gyro;
 public class TestGroup extends SequentialCommandGroup {
   public TestGroup(Drivetrain subsystemDrivetrain,Feeder subsystemFeeder,Chucc subsystemChucc,Gyro subsystemGyro) {
     super(
-    new MoveForTime(subsystemDrivetrain, () ->-0.5,() -> 0).withTimeout(0.5),
+    new MoveForTime(subsystemDrivetrain, () ->-0.3,() -> 0).withTimeout(0.5),
     new ChuccBall(subsystemChucc,false).withTimeout(0.1),
     new GyroLineUp(subsystemDrivetrain,subsystemGyro,() -> 0,true),
     new LineUpTarget(subsystemDrivetrain,true).withTimeout(3),

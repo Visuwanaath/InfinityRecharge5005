@@ -51,7 +51,7 @@ public class RobotContainer {
     new JoystickButton(controller1,4).whenPressed(new SpinForRotations(m_Spinner,() -> 30));
     new JoystickButton(controller1,3).whenPressed(new SpinUntilColor(m_Spinner));
     new JoystickButton(controller1,2).whileHeld(new LineUpTarget(m_Drivetrain,true));
-    new JoystickButton(controller1,6).whenPressed(new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro));
+    new JoystickButton(controller1,6).whenPressed(new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro,m_Zucc));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

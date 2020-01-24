@@ -14,9 +14,11 @@ import frc.robot.subsystems.Zucc;
 public class ZuccBall extends CommandBase {
   double m_speed;
   private final Zucc m_Zucc;
-  public ZuccBall(Zucc subsystem,DoubleSupplier speed) {
+  boolean m_cutoff;
+  public ZuccBall(Zucc subsystem,DoubleSupplier speed, boolean cutoff) {
     m_Zucc = subsystem;
     m_speed = speed.getAsDouble();
+    m_cutoff = cutoff;
     addRequirements(m_Zucc);
   }
 
@@ -33,7 +35,9 @@ public class ZuccBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Zucc.ZuccBall(0);
+    if(m_cutoff){
+      m_Zucc.ZuccBall(0);
+    }
   }
 
   // Returns true when the command should end.

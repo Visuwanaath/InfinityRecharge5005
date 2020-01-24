@@ -27,7 +27,12 @@ public class TestGroup extends SequentialCommandGroup {
     new GyroLineUp(subsystemDrivetrain,subsystemGyro,() -> 0,false).withTimeout(5),
     new ZuccBall(subsystemZucc,()-> 1,false).withTimeout(0.1),
     new MoveForTime(subsystemDrivetrain, () ->-0.3,() -> 0).withTimeout(0.5),
-    new ZuccBall(subsystemZucc,()-> 1,true).withTimeout(3)
+    new ZuccBall(subsystemZucc,()-> 1,true).withTimeout(3),
+    new ChuccBall(subsystemChucc,false).withTimeout(0.1),
+    new MoveForTime(subsystemDrivetrain, () ->0.3,() -> 0).withTimeout(0.7),
+    new LineUpTarget(subsystemDrivetrain,true).withTimeout(3),
+    new FeedBall(subsystemFeeder, () -> 1).withTimeout(3.5),
+    new ChuccBall(subsystemChucc,true).withTimeout(0.1)
     );
   }
 }

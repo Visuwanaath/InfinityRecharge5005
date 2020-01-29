@@ -8,23 +8,22 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Victor;;
+import edu.wpi.first.wpilibj.Victor;
 public class Chucc extends SubsystemBase {
-  private Victor Chuccyboi1 = new Victor(2);
-  private Victor Chuccyboi2 = new Victor(7);
-  /**
-   * Creates a new Chucc.
-   */
+  private Spark Chuccyboi1 = new Spark(4);
+  private Spark Chuccyboi2 = new Spark(5);
+  private Encoder encoder1 = new Encoder(0,1);
   public Chucc() {
-
   }
   public void ChuccBall(double speed1, double speed2){
     Chuccyboi1.set(speed1);
-    Chuccyboi2.set(speed2);
+    Chuccyboi2.set(-speed2);
   }
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    System.out.println("Shooter Speed: " + encoder1.getRate());
+    System.out.println("Distance " + encoder1.getDistance());
   }
 }

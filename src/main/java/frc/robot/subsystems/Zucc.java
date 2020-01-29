@@ -9,9 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Victor;
 public class Zucc extends SubsystemBase {
-  private Victor Zuccyboi1 = new Victor(4);
+  private Spark Zuccyboi1 = new Spark(7);
   /**
    * Creates a new Zucc.
    */

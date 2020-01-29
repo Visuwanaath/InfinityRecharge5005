@@ -9,16 +9,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chucc;
+import frc.robot.subsystems.ChuccPID;
 import edu.wpi.first.networktables.NetworkTableInstance;
 public class ChuccBall extends CommandBase {
   private final Chucc m_Chucc;
   double TargetDetected;
   double Distance;
   boolean m_Cutoff;
-  public ChuccBall(Chucc subsystem, boolean Cutoff){
+  private final ChuccPID m_ChuccPID;
+  public ChuccBall(Chucc subsystem, boolean Cutoff,ChuccPID ChuccPIDSubsystem){
     // Use addRequirements() here to declare subsystem dependencies.
     m_Cutoff = Cutoff;
     m_Chucc = subsystem;
+    m_ChuccPID = ChuccPIDSubsystem;
   }
 
   // Called when the command is initially scheduled.
@@ -35,8 +38,12 @@ public class ChuccBall extends CommandBase {
       Distance= GetDistance(20, 88, OffsetY, 35);
       //Find Relation between distance and speed and implement here
       m_Chucc.ChuccBall(1,1);
+      //m_ChuccPID.enable();
+      //m_ChuccPID.setSetpoint(50);
     }else{
-      m_Chucc.ChuccBall(0.5,0.5);
+      m_Chucc.ChuccBall(1,1);
+      //m_ChuccPID.enable();
+      //m_ChuccPID.setSetpoint(500);
     }
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){
@@ -51,6 +58,7 @@ public class ChuccBall extends CommandBase {
     if(m_Cutoff){
       m_Chucc.ChuccBall(0, 0);
     }
+    //m_ChuccPID.disable();
   }
 
   // Returns true when the command should end.

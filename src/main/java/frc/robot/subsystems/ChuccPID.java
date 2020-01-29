@@ -11,13 +11,12 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Victor;
 public class ChuccPID extends PIDSubsystem {
-  private Spark Chuccyboi1 = new Spark(2);
-  private Spark Chuccyboi2 = new Spark(7);
-  private DutyCycleEncoder encoder1 = new DutyCycleEncoder(1);
-  private DutyCycleEncoder encoder2 = new DutyCycleEncoder(2);
+  private Victor Chuccyboi1 = new Victor(4);
+  private Victor Chuccyboi2 = new Victor(5);
+  private Encoder encoder1 = new Encoder(0,1);
   //private final SimpleMotorFeedforward m_shooterFeedforward =
   //new SimpleMotorFeedforward(0.2,0.5);
   /**
@@ -27,13 +26,12 @@ public class ChuccPID extends PIDSubsystem {
     super(
         // The PIDController used by the subsystem
         //get values from shuffleboard
-        new PIDController(0, 0, 0));
+        new PIDController(1, 0, 0));
   }
   @Override
   public double getMeasurement() {
-    return encoder1.getFrequency();
+    return encoder1.getRate();
   }
-
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
   }
@@ -43,6 +41,5 @@ public class ChuccPID extends PIDSubsystem {
   }
   public void ChuccBall(double speed1, double speed2){
     Chuccyboi1.set(speed1);
-    Chuccyboi2.set(speed2);
   }
 }

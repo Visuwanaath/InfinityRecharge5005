@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 public class Drivetrain extends SubsystemBase {
   //private Spark rightMotor = new Spark(0);
-  private Talon rightMotor = new Talon(0);
-  private Talon leftMotor = new Talon(1);
+  private Spark rightMotor = new Spark(0);
+  private Spark leftMotor = new Spark(1);
   public Drivetrain() {
   }
 public void Go(double rightTrigger,double leftTrigger,double leftStickAxis){

@@ -37,13 +37,13 @@ public class ChuccBall extends CommandBase {
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       Distance= GetDistance(20, 88, OffsetY, 35);
       //Find Relation between distance and speed and implement here
-      m_Chucc.ChuccBall(1,1);
-      //m_ChuccPID.enable();
-      //m_ChuccPID.setSetpoint(50);
+      //m_Chucc.ChuccBall(1,1);
+      m_ChuccPID.enable();
+      m_ChuccPID.setSetpoint(50);
     }else{
-      m_Chucc.ChuccBall(1,1);
-      //m_ChuccPID.enable();
-      //m_ChuccPID.setSetpoint(500);
+      //m_Chucc.ChuccBall(1,1);
+      m_ChuccPID.enable();
+      m_ChuccPID.setSetpoint(50);
     }
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){
@@ -56,9 +56,10 @@ public class ChuccBall extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     if(m_Cutoff){
-      m_Chucc.ChuccBall(0, 0);
+      //m_Chucc.ChuccBall(0, 0);
+      m_ChuccPID.ChuccBall(0,0);
     }
-    //m_ChuccPID.disable();
+    m_ChuccPID.disable();
   }
 
   // Returns true when the command should end.

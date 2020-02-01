@@ -8,15 +8,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 public class ChuccPID extends PIDSubsystem {
-  private Victor Chuccyboi1 = new Victor(4);
+  private Victor Chuccyboi1 = new Victor(2);
   private Victor Chuccyboi2 = new Victor(5);
   private Encoder encoder1 = new Encoder(0,1);
+  //private Victor Chuccyboi1 = new Victor(18);
+  //private Victor Chuccyboi2 = new Victor(15);
   //private final SimpleMotorFeedforward m_shooterFeedforward =
   //new SimpleMotorFeedforward(0.2,0.5);
   /**
@@ -24,13 +26,15 @@ public class ChuccPID extends PIDSubsystem {
    */
   public ChuccPID() {
     super(
-        // The PIDController used by the subsystem
-        //get values from shuffleboard
-        new PIDController(1, 0, 0));
+        new PIDController(0.02, 0.125, 0.00));
+        encoder1.setDistancePerPulse(0.01);
   }
   @Override
   public double getMeasurement() {
-    return encoder1.getRate();
+    System.out.println("Shooter Speed: " + encoder1.getRate());
+    SmartDashboard.putNumber("Shooter Current Speed",encoder1.getRate());
+    System.out.println("Distance " + encoder1.getDistance());
+    return encoder1.getRate() * -1;
   }
   public boolean atSetpoint() {
     return m_controller.atSetpoint();
@@ -41,5 +45,6 @@ public class ChuccPID extends PIDSubsystem {
   }
   public void ChuccBall(double speed1, double speed2){
     Chuccyboi1.set(speed1);
+    Chuccyboi2.set(speed2);
   }
 }

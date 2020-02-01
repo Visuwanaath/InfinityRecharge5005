@@ -25,6 +25,6 @@ public class Gyro extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    System.out.println("Angle: " + m_gyro.getAngle());
+    //System.out.println("Angle: " + m_gyro.getAngle());
   }
 }

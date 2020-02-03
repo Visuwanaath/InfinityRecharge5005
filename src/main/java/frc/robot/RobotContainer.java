@@ -38,9 +38,6 @@ public class RobotContainer {
     m_Drivetrain.setDefaultCommand(
       new DefaultDrive(m_Drivetrain, () -> controller1.getRawAxis(3), () -> controller1.getRawAxis(2), () -> controller1.getRawAxis(0))
     );
-    SmartDashboard.putNumber("ShooterKp",0.1);
-    SmartDashboard.putNumber("ShooterKi",0);
-    SmartDashboard.putNumber("ShooterKd",0);
   }
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by

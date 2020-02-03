@@ -20,6 +20,7 @@ public class ChuccPID extends PIDSubsystem {
   private Encoder encoder1 = new Encoder(0,1);
   ArrayList<Double> AverageValues = new ArrayList<Double>(10);
   double AverageValue;
+  //1
   //private Victor Chuccyboi1 = new Victor(18);
   //private Victor Chuccyboi2 = new Victor(15);
   //private final SimpleMotorFeedforward m_shooterFeedforward =

@@ -39,11 +39,13 @@ public class ChuccBall extends CommandBase {
       //Find Relation between distance and speed and implement here
       //m_Chucc.ChuccBall(1,1);
       m_ChuccPID.enable();
-      m_ChuccPID.setSetpoint(50);
+      m_ChuccPID.setSetpoint(20);
+      System.out.println("PID at point: " +m_ChuccPID.atSetpoint());
     }else{
       //m_Chucc.ChuccBall(1,1);
       m_ChuccPID.enable();
-      m_ChuccPID.setSetpoint(50);
+      m_ChuccPID.setSetpoint(20);
+      System.out.println("PID at point: " +m_ChuccPID.atSetpoint());
     }
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){

@@ -29,8 +29,9 @@ public class ChuccPID extends PIDSubsystem {
    */
   public ChuccPID() {
     super(
-        new PIDController(0.19, 0.03,0.0,0.05));
-        //0.6,0.0005
+        new PIDController(0.19, 0.19,0.02,0.05));
+        //0.03 - I
+        //0.19 - P
         encoder1.setDistancePerPulse(0.001);
         m_controller.setTolerance(0.1);
 

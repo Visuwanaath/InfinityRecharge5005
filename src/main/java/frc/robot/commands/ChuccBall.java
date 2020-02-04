@@ -17,6 +17,7 @@ public class ChuccBall extends CommandBase {
   double TargetDetected;
   double Distance;
   boolean m_Cutoff;
+  double SpeedToSendToPID;
   private final ChuccPID m_ChuccPID;
   private final ChuccPID2 m_ChuccPID2;
   public ChuccBall(Chucc subsystem, boolean Cutoff,ChuccPID ChuccPIDSubsystem,ChuccPID2 ChuccPID2subsystem){
@@ -43,14 +44,20 @@ public class ChuccBall extends CommandBase {
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       Distance= GetDistance(20, 88, OffsetY, 35);
       //Find Relation between distance and speed and implement here
-      m_ChuccPID.enable();
-      m_ChuccPID.setSetpoint(80);
+      SpeedToSendToPID = -80;
+      if(m_ChuccPID.isEnabled() == false){
+        m_ChuccPID.enable();
+      }
+      m_ChuccPID.setSetpoint(-80);
 
       //m_ChuccPID2.enable();
       //m_ChuccPID2.setSetpoint(80);
     }else{
-      m_ChuccPID.enable();
-      m_ChuccPID.setSetpoint(80);
+      SpeedToSendToPID = -80;
+      if(m_ChuccPID.isEnabled() == false){
+        m_ChuccPID.enable();
+      }
+      m_ChuccPID.setSetpoint(-80);
       
       //m_ChuccPID2.enable();
       //m_ChuccPID2.setSetpoint(80);

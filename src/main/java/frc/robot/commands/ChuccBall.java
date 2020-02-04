@@ -46,14 +46,14 @@ public class ChuccBall extends CommandBase {
       m_ChuccPID.enable();
       m_ChuccPID.setSetpoint(80);
 
-      m_ChuccPID2.enable();
-      m_ChuccPID2.setSetpoint(80);
+      //m_ChuccPID2.enable();
+      //m_ChuccPID2.setSetpoint(80);
     }else{
       m_ChuccPID.enable();
       m_ChuccPID.setSetpoint(80);
       
-      m_ChuccPID2.enable();
-      m_ChuccPID2.setSetpoint(80);
+      //m_ChuccPID2.enable();
+      //m_ChuccPID2.setSetpoint(80);
     }
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){
@@ -68,7 +68,7 @@ public class ChuccBall extends CommandBase {
     if(m_Cutoff){
       //m_Chucc.ChuccBall(0, 0);
       m_ChuccPID.disable();
-      m_ChuccPID2.disable();
+      //m_ChuccPID2.disable();
     }
   }
 

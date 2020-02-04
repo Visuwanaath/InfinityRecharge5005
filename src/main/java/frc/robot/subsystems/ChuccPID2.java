@@ -33,6 +33,7 @@ public class ChuccPID2 extends PIDSubsystem {
     System.out.println("Shooter Speed: " +-1* encoder2.getRate());
     SmartDashboard.putNumber("Shooter Current Speed",-1*encoder2.getRate());
     System.out.println("Distance " + encoder2.getDistance());
+    AverageValue = 0;
     if(AverageValues.isEmpty()){
       AverageValues.add(-1*encoder2.getRate());
     }else if(AverageValues.size() < 5){

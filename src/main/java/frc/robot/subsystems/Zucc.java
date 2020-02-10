@@ -8,9 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
 public class Zucc extends SubsystemBase {
-  private Spark Zuccyboi1 = new Spark(7);
+  private Spark Zuccyboi1 = new Spark(Constants.LoaderPWM);
   /**
    * Creates a new Zucc.
    */

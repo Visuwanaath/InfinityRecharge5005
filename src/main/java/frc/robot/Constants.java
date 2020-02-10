@@ -16,4 +16,14 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static int DriveTrainLeftMotor1PWM = 1;
+    public static int DriveTrainLeftMotor2PWM = 3;
+    public static int DriveTrainRightMotor1PWM = 0;
+    public static int DriveTrainRightMotor2PWM = 4;
+    public static int ShooterLeftPWM = 2;
+    public static int ShooterRightPWM = 5;
+    public static int FeederPWM = 9;
+    public static int LoaderPWM = 7;
+    public static int SpinnerArmPWM = 6;
+    public static int ClimberPWM = 8;
 }

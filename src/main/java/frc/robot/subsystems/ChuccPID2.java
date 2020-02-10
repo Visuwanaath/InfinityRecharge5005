@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
+import frc.robot.Constants;
 public class ChuccPID2 extends PIDSubsystem {
-  private Victor Chuccyboi2 = new Victor(5);
-  private Encoder encoder2 = new Encoder(2,3);
+  private Victor Chuccyboi2 = new Victor(Constants.ShooterRightPWM);
+  private Encoder encoder2 = new Encoder(4,5);
   ArrayList<Double> AverageValues = new ArrayList<Double>(5);
   double AverageValue;
   /**

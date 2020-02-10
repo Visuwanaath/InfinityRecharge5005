@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -30,6 +31,7 @@ public class RobotContainer {
   private final ChuccPID m_ChuccPID = new ChuccPID();
   private final ChuccPID2 m_ChuccPID2 = new ChuccPID2();
   private Joystick controller1 = new Joystick(0);
+  private final Command SixBallAuto = new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro,m_Zucc,m_ChuccPID,m_ChuccPID2);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -59,4 +61,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  public Command getAutonomousCommand() {
+    return SixBallAuto;
+  }
 }

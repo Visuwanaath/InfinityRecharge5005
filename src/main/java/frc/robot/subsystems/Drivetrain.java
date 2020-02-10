@@ -7,15 +7,15 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 public class Drivetrain extends SubsystemBase {
   //private Spark rightMotor = new Spark(0);
-  private Spark rightMotor = new Spark(0);
-  private Spark leftMotor = new Spark(1);
+  private Spark rightMotor = new Spark(Constants.DriveTrainRightMotor1PWM);
+  private Spark leftMotor = new Spark(Constants.DriveTrainLeftMotor1PWM);
+  //private Encoder encoder = new Encoder(2, 3);
   public Drivetrain() {
   }
 public void Go(double rightTrigger,double leftTrigger,double leftStickAxis){
@@ -42,5 +42,7 @@ public void ArcDrive(double GoSpeed, double Turn){
 }
 @Override
 public void periodic() {
+  //encoder.setDistancePerPulse(10);
+  //System.out.println("Arm Encoder: " +encoder.getDistance());
 }
 }

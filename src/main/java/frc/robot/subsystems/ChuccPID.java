@@ -14,16 +14,12 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
+import frc.robot.Constants;
 public class ChuccPID extends PIDSubsystem {
-  private Victor Chuccyboi1 = new Victor(2);
+  private Victor Chuccyboi1 = new Victor(Constants.ShooterLeftPWM);
   private Encoder encoder1 = new Encoder(0,1);
   ArrayList<Double> AverageValues = new ArrayList<Double>(5);
   double AverageValue;
-  //1
-  //private Victor Chuccyboi1 = new Victor(18);
-  //private Victor Chuccyboi2 = new Victor(15);
-  //private final SimpleMotorFeedforward m_shooterFeedforward =
-  //new SimpleMotorFeedforward(0.2,0.5);
   /**
    * Creates a new ChuccPID.
    */
@@ -54,6 +50,7 @@ public class ChuccPID extends PIDSubsystem {
     }
     AverageValue = AverageValue/AverageValues.size();
     System.out.println("Average Speed: " +AverageValue);
+    System.out.println("Actual Speed: " +encoder1.getRate() * -1);
     SmartDashboard.putNumber("Shooter Current Speed",AverageValue);
     return AverageValue;
   }

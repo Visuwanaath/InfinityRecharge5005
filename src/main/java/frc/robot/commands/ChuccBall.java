@@ -44,20 +44,20 @@ public class ChuccBall extends CommandBase {
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
       Distance= GetDistance(20, 88, OffsetY, 35);
       //Find Relation between distance and speed and implement here
-      SpeedToSendToPID = -80;
+      SpeedToSendToPID = -50;
       if(m_ChuccPID.isEnabled() == false){
         m_ChuccPID.enable();
       }
-      m_ChuccPID.setSetpoint(-80);
+      m_ChuccPID.setSetpoint(SpeedToSendToPID);
 
       //m_ChuccPID2.enable();
       //m_ChuccPID2.setSetpoint(80);
     }else{
-      SpeedToSendToPID = -80;
+      SpeedToSendToPID = -50;
       if(m_ChuccPID.isEnabled() == false){
         m_ChuccPID.enable();
       }
-      m_ChuccPID.setSetpoint(-80);
+      m_ChuccPID.setSetpoint(SpeedToSendToPID);
       
       //m_ChuccPID2.enable();
       //m_ChuccPID2.setSetpoint(80);

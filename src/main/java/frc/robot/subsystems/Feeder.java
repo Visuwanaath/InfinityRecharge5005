@@ -8,10 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
 public class Feeder extends SubsystemBase {
-  public Spark Feeder = new Spark(9);
+  public Spark Feeder = new Spark(Constants.FeederPWM);
   public Feeder() {
 
   }

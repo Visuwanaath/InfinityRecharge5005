@@ -48,8 +48,6 @@ public class LineUpTarget extends CommandBase {
   public void initialize() {
     EndNow = false;
     TargetDetected = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-    SmartDashboard.putNumber("Steer_K", STEER_K);
-    SmartDashboard.putNumber("Drive_K", DRIVE_K);
     SmartDashboard.putNumber("Desired Distance", Desired_distance);
   }
   // Called every time the scheduler runs while the command is scheduled.
@@ -63,7 +61,6 @@ public class LineUpTarget extends CommandBase {
         DRIVE_K = 0;
       }
       actual_Distance= GetDistance(20, 88, OffsetY, 35);
-      System.out.println("Distance: " + actual_Distance);
       SmartDashboard.putNumber("Actual Distance", actual_Distance);
       if(OffsetX != 0){
       steer_cmd = OffsetX * STEER_K;

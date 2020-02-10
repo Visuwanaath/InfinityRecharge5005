@@ -26,31 +26,24 @@ public class LineUpTarget extends CommandBase {
   double Desired_distance;
   double actual_Distance;
   boolean m_DriveToDistance;
-  /**
-   * Creates a new LineUpTarget.
-   */
    //IMPORT LINE BELOW FOR ACCESSSING STUFF FROM LIMELIGHT
    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("<variablename>").getDouble(0);
   public LineUpTarget(Drivetrain subsystem,boolean DriveToDistance) {
     m_Drivetrain = subsystem;
     addRequirements(m_Drivetrain);
     m_DriveToDistance = DriveToDistance;
-    //steer was 0.07
     STEER_K = 0.05;                    // how hard to turn toward the target
     DRIVE_K = 0.07;                    // how hard to drive fwd toward the target
-    DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
+    //DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
     MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
     Desired_distance = 84;
-    // Use addRequirements() here to declare subsystem dependencies.
   } 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     EndNow = false;
     TargetDetected = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
     SmartDashboard.putNumber("Desired Distance", Desired_distance);
   }
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(TargetDetected == 1){
@@ -60,7 +53,7 @@ public class LineUpTarget extends CommandBase {
       if(m_DriveToDistance == false){
         DRIVE_K = 0;
       }
-      actual_Distance= GetDistance(20, 88, OffsetY, 35);
+      actual_Distance = GetDistance(20, 88, OffsetY, 35);
       SmartDashboard.putNumber("Actual Distance", actual_Distance);
       if(OffsetX != 0){
       steer_cmd = OffsetX * STEER_K;
@@ -78,7 +71,6 @@ public class LineUpTarget extends CommandBase {
       m_Drivetrain.Go(0, 0, 1);
     }
   }
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Drivetrain.Go(0, 0, 0);
@@ -89,7 +81,6 @@ public class LineUpTarget extends CommandBase {
     double distance = (TargetHeight - LimeHeight) /(Math.tan(Angle));
     return distance;
   }
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     if(EndNow){

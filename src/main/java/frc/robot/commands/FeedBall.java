@@ -14,9 +14,11 @@ import frc.robot.subsystems.Feeder;
 public class FeedBall extends CommandBase {
   private final Feeder m_Feeder;
   DoubleSupplier m_speed;
-  public FeedBall(Feeder subsystem, DoubleSupplier speed) {
+  boolean m_cutoff;
+  public FeedBall(Feeder subsystem, DoubleSupplier speed, boolean cutoff) {
     m_Feeder = subsystem;
     m_speed = speed;
+    m_cutoff = cutoff;
     addRequirements(m_Feeder);
   }
 
@@ -34,7 +36,9 @@ public class FeedBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Feeder.FeedBall(0);
+    if(m_cutoff){
+      m_Feeder.FeedBall(0);
+    }
   }
 
   // Returns true when the command should end.

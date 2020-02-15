@@ -30,6 +30,7 @@ public class RobotContainer {
   //private final LEDS m_Leds = new LEDS();
   private final ChuccPID m_ChuccPID = new ChuccPID();
   private final ChuccPID2 m_ChuccPID2 = new ChuccPID2();
+  private final Climber m_Climber = new Climber();
   private Joystick controller1 = new Joystick(0);
   private final Command SixBallAuto = new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro,m_Zucc,m_ChuccPID,m_ChuccPID2);
   /**
@@ -53,8 +54,10 @@ public class RobotContainer {
     new JoystickButton(controller1,2).whileHeld(new LineUpTarget(m_Drivetrain,false));
     new JoystickButton(controller1,6).whenPressed(new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro,m_Zucc,m_ChuccPID,m_ChuccPID2));
     new JoystickButton(controller1,5).whileHeld(new ChuccBall(m_Chucc, true, m_ChuccPID,m_ChuccPID2));
-    new JoystickButton(controller1,8).whenPressed(new ChuccBall(m_Chucc, false, m_ChuccPID,m_ChuccPID2).withTimeout(0.1));
-    new JoystickButton(controller1,9).whenPressed(new ChuccBall(m_Chucc, true, m_ChuccPID,m_ChuccPID2).withTimeout(1));
+    new JoystickButton(controller1,8).whileHeld(new FeedBall(m_Feeder, () ->-1, true));
+    new JoystickButton(controller1,9).whileHeld(new ZuccBall(m_Zucc, ()->-0.75, true));
+    new JoystickButton(controller1,10).whileHeld(new Climb(()->controller1.getRawAxis(5), m_Climber));
+    //new JoystickButton(controller1,9).whenPressed(new ChuccBall(m_Chucc, true, m_ChuccPID,m_ChuccPID2).withTimeout(1));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

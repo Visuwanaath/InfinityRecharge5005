@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import frc.robot.Constants;
 public class ChuccPID2 extends PIDSubsystem {
-  private Victor Chuccyboi2 = new Victor(Constants.ShooterRightPWM);
+  private Spark Chuccyboi2 = new Spark(Constants.ShooterRightPWM);
   private Encoder encoder2 = new Encoder(4,5);
   ArrayList<Double> AverageValues = new ArrayList<Double>(5);
   double AverageValue;
@@ -54,5 +54,8 @@ public class ChuccPID2 extends PIDSubsystem {
   public void useOutput(double output, double setpoint) {
     System.out.println("Output: " +output);
     Chuccyboi2.set(12/130 * setpoint +output);
+  }
+  public void ChuccBallRight(double speed1){
+    Chuccyboi2.set(speed1);
   }
 }

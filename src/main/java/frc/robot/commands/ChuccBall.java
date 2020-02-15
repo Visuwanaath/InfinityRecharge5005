@@ -45,20 +45,28 @@ public class ChuccBall extends CommandBase {
       Distance= GetDistance(20, 88, OffsetY, 35);
       //Find Relation between distance and speed and implement here
       SpeedToSendToPID = -50;
+      m_ChuccPID.ChuccBallLeft(-0.5);
+      m_ChuccPID2.ChuccBallRight(0.5);/*
       if(m_ChuccPID.isEnabled() == false){
         m_ChuccPID.enable();
       }
       m_ChuccPID.setSetpoint(SpeedToSendToPID);
-
+      */
       //m_ChuccPID2.enable();
       //m_ChuccPID2.setSetpoint(80);
     }else{
       SpeedToSendToPID = -50;
+      
+      m_ChuccPID.ChuccBallLeft(-0.5);
+      m_ChuccPID2.ChuccBallRight(0.5);
+      /*
       if(m_ChuccPID.isEnabled() == false){
         m_ChuccPID.enable();
       }
       m_ChuccPID.setSetpoint(SpeedToSendToPID);
-      
+      */
+
+
       //m_ChuccPID2.enable();
       //m_ChuccPID2.setSetpoint(80);
     }
@@ -74,8 +82,10 @@ public class ChuccBall extends CommandBase {
   public void end(boolean interrupted) {
     if(m_Cutoff){
       //m_Chucc.ChuccBall(0, 0);
-      m_ChuccPID.disable();
+      //m_ChuccPID.disable();
       //m_ChuccPID2.disable();
+      m_ChuccPID.ChuccBallLeft(0);
+      m_ChuccPID2.ChuccBallRight(0);
     }
   }
 

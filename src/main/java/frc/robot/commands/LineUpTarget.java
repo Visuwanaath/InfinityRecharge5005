@@ -53,7 +53,7 @@ public class LineUpTarget extends CommandBase {
       if(m_DriveToDistance == false){
         DRIVE_K = 0;
       }
-      actual_Distance = GetDistance(20, 88, OffsetY, 35);
+      actual_Distance = GetDistance(18.2, 89, OffsetY, 27);
       SmartDashboard.putNumber("Actual Distance", actual_Distance);
       if(OffsetX != 0){
       steer_cmd = OffsetX * STEER_K;

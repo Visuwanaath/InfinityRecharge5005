@@ -27,7 +27,6 @@ public class RobotContainer {
   private final Chucc m_Chucc = new Chucc();
   private final Feeder m_Feeder = new Feeder();
   private final Gyro m_Gyro = new Gyro();
-  //private final LEDS m_Leds = new LEDS();
   private final ChuccPID m_ChuccPID = new ChuccPID();
   private final ChuccPID2 m_ChuccPID2 = new ChuccPID2();
   private final Climber m_Climber = new Climber();

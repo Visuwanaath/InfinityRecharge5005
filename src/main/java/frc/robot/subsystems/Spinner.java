@@ -25,7 +25,6 @@ public class Spinner extends SubsystemBase {
   public static final Color kGreenTarget = ColorMatch.makeColor(0.196, 0.557, 0.246);
   public static final Color kRedTarget = ColorMatch.makeColor(0.475, 0.371, 0.153);
   public static final Color kYellowTarget = ColorMatch.makeColor(0.293, 0.561, 0.144);
-  //private ColorMatchResult matchedResult = new ColorMatchResult(Color.kBlack, 0);
   public Spinner() {
   }
   public void setArmSpeed(double speed){

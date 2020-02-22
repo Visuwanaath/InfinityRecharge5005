@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Victor;
 import frc.robot.Constants;
 public class ChuccPID2 extends PIDSubsystem {
   private Spark Chuccyboi2 = new Spark(Constants.ShooterRightPWM);
-  private Encoder encoder2 = new Encoder(4,5);
+  private Encoder encoder2 = new Encoder(2,3);
   ArrayList<Double> AverageValues = new ArrayList<Double>(5);
   double AverageValue;
   /**
@@ -31,9 +31,7 @@ public class ChuccPID2 extends PIDSubsystem {
   }
   @Override
   public double getMeasurement() {
-    System.out.println("Shooter Speed: " +-1* encoder2.getRate());
-    SmartDashboard.putNumber("Shooter Current Speed",-1*encoder2.getRate());
-    System.out.println("Distance " + encoder2.getDistance());
+    SmartDashboard.putNumber("Shooter Current Speed Right",-1*encoder2.getRate());
     AverageValue = 0;
     if(AverageValues.isEmpty()){
       AverageValues.add(-1*encoder2.getRate());
@@ -47,12 +45,12 @@ public class ChuccPID2 extends PIDSubsystem {
       AverageValue = AverageValue + AverageValues.get(i);
     }
     AverageValue = AverageValue/AverageValues.size();
-    System.out.println("Average: " +AverageValue);
+    //System.out.println("Average: " +AverageValue);
     return AverageValue;
   }
   @Override
   public void useOutput(double output, double setpoint) {
-    System.out.println("Output: " +output);
+    //System.out.println("Output: " +output);
     Chuccyboi2.set(12/130 * setpoint +output);
   }
   public void ChuccBallRight(double speed1){

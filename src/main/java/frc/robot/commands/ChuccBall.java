@@ -42,33 +42,32 @@ public class ChuccBall extends CommandBase {
   public void execute() {
     if(TargetDetected == 1){
       double OffsetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-      Distance= GetDistance(20, 88, OffsetY, 35);
+      Distance= GetDistance(18.2, 89, OffsetY, 27);
+      System.out.println("Distance: " +Distance);
       //Find Relation between distance and speed and implement here
-      SpeedToSendToPID = -50;
-      m_ChuccPID.ChuccBallLeft(-0.5);
-      m_ChuccPID2.ChuccBallRight(0.5);/*
+      SpeedToSendToPID = 63.5;
+      //Set Left Shooter Speed
       if(m_ChuccPID.isEnabled() == false){
         m_ChuccPID.enable();
       }
-      m_ChuccPID.setSetpoint(SpeedToSendToPID);
-      */
-      //m_ChuccPID2.enable();
-      //m_ChuccPID2.setSetpoint(80);
+      m_ChuccPID.setSetpoint(-1*SpeedToSendToPID);
+      //Set Right Shooter Speed
+      if(m_ChuccPID2.isEnabled() == false){
+        m_ChuccPID2.enable();
+      }
+      m_ChuccPID2.setSetpoint(SpeedToSendToPID);
     }else{
-      SpeedToSendToPID = -50;
-      
-      m_ChuccPID.ChuccBallLeft(-0.5);
-      m_ChuccPID2.ChuccBallRight(0.5);
-      /*
+      SpeedToSendToPID = 10;
+      //Set Left Shooter Speed
       if(m_ChuccPID.isEnabled() == false){
         m_ChuccPID.enable();
       }
-      m_ChuccPID.setSetpoint(SpeedToSendToPID);
-      */
-
-
-      //m_ChuccPID2.enable();
-      //m_ChuccPID2.setSetpoint(80);
+      m_ChuccPID.setSetpoint(-1*SpeedToSendToPID);
+      //Set Right Shooter Speed
+      if(m_ChuccPID2.isEnabled() == false){
+        m_ChuccPID2.enable();
+      }
+      m_ChuccPID2.setSetpoint(SpeedToSendToPID);
     }
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){
@@ -82,10 +81,10 @@ public class ChuccBall extends CommandBase {
   public void end(boolean interrupted) {
     if(m_Cutoff){
       //m_Chucc.ChuccBall(0, 0);
-      //m_ChuccPID.disable();
-      //m_ChuccPID2.disable();
-      m_ChuccPID.ChuccBallLeft(0);
-      m_ChuccPID2.ChuccBallRight(0);
+      m_ChuccPID.disable();
+      m_ChuccPID2.disable();
+      //m_ChuccPID.ChuccBallLeft(0);
+      //m_ChuccPID2.ChuccBallRight(0);
     }
   }
 

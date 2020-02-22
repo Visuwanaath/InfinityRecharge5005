@@ -16,14 +16,8 @@ public class Zucc extends SubsystemBase {
    * Creates a new Zucc.
    */
   public Zucc() {
-
   }
   public void ZuccBall(double speed){
     Zuccyboi1.set(speed);
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

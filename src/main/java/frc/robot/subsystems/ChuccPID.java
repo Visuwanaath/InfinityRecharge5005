@@ -25,7 +25,7 @@ public class ChuccPID extends PIDSubsystem {
    */
   public ChuccPID() {
     super(
-        new PIDController(0.19, 0.19,0.02,0.05));
+      new PIDController(0.055, 0.5,0.005,0.05));
         //0.03 - I
         //0.19 - P
         encoder1.setDistancePerPulse(0.001);
@@ -49,9 +49,9 @@ public class ChuccPID extends PIDSubsystem {
       AverageValue = AverageValue + AverageValues.get(i);
     }
     AverageValue = AverageValue/AverageValues.size();
-    System.out.println("Average Speed: " +AverageValue);
-    System.out.println("Actual Speed: " +encoder1.getRate() * -1);
-    SmartDashboard.putNumber("Shooter Current Speed",AverageValue);
+    //System.out.println("Average Speed: " +AverageValue);
+    //System.out.println("Actual Speed: " +encoder1.getRate() * -1);
+    SmartDashboard.putNumber("Shooter Current Speed Left",AverageValue);
     return AverageValue;
   }
   public boolean atSetpoint() {

@@ -35,9 +35,8 @@ String currentColor;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  currentColor = SmartDashboard.getString("Detected Color", "NoU");
-  SmartDashboard.putString("detectedCurrentColor", currentColor);
-  if(currentColor != "NoU"){
+  currentColor = m_Spinner.getColorString();
+  SmartDashboard.putString("Current Color", currentColor);
     if(currentColor.equals(LastColor) == false){
       ColorChanges = ColorChanges + 1;
       System.out.println("done");
@@ -47,7 +46,6 @@ String currentColor;
       LastColor = currentColor;
       m_Spinner.setArmSpeed(1);
     }
-  }
   }
   // Called once the command ends or is interrupted.
   @Override

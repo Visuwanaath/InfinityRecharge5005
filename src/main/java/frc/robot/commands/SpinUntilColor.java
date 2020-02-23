@@ -28,7 +28,6 @@ public class SpinUntilColor extends CommandBase {
   @Override
   public void initialize() {
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    System.out.println(gameData);
     End = false;
   }
 
@@ -36,9 +35,8 @@ public class SpinUntilColor extends CommandBase {
   @Override
   public void execute() {
   double spinSpeed = 0.5;
-  currentColor = SmartDashboard.getString("Detected Color", "NoU");
+  currentColor = m_Spinner.getColorString();
   if(currentColor.equals("NoU") == false){
-    System.out.println(currentColor);
     if(gameData.equals("B")){
       if(currentColor.equals("Blue") == false){
         m_Spinner.setArmSpeed(spinSpeed);
@@ -54,7 +52,6 @@ public class SpinUntilColor extends CommandBase {
         m_Spinner.setArmSpeed(0);
       }
     }else if(gameData.equals("R")){
-      System.out.println("testworked");
       if(currentColor.equals("Red") == false){
         m_Spinner.setArmSpeed(spinSpeed);
       }else{

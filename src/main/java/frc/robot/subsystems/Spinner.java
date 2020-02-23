@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -25,21 +24,22 @@ public class Spinner extends SubsystemBase {
   public static final Color kGreenTarget = ColorMatch.makeColor(0.196, 0.557, 0.246);
   public static final Color kRedTarget = ColorMatch.makeColor(0.475, 0.371, 0.153);
   public static final Color kYellowTarget = ColorMatch.makeColor(0.293, 0.561, 0.144);
+  private Color detectedColor;
+  private String colorString;
+  ColorMatchResult match;
   public Spinner() {
-  }
-  public void setArmSpeed(double speed){
-    spinnerArm.set(speed);
-  }
-  @Override
-  public void periodic() {
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
     m_colorMatcher.setConfidenceThreshold(0.80);
-    Color detectedColor = m_colorSensor.getColor();
-    String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+  }
+  public void setArmSpeed(double speed){
+    spinnerArm.set(speed);
+  }
+  public String getColorString(){
+    detectedColor = m_colorSensor.getColor();
+    match = m_colorMatcher.matchClosestColor(detectedColor);
     if (match.color == kBlueTarget) {
       colorString = "Blue";
     } else if (match.color == kRedTarget) {
@@ -51,10 +51,19 @@ public class Spinner extends SubsystemBase {
     } else {
       colorString = "Unknown";
     }
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
+    return colorString;
+  }
+  public double[] getColorRGBVals(){
+    double[] toReturn = new double[4];
+    detectedColor = m_colorSensor.getColor();
+    match = m_colorMatcher.matchClosestColor(detectedColor);
+    toReturn[0] = detectedColor.red;
+    toReturn[1] = detectedColor.green;
+    toReturn[2] = detectedColor.blue;
+    toReturn[3] = match.confidence;
+    return toReturn;
+  }
+  @Override
+  public void periodic() {
   }
 }

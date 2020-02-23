@@ -65,15 +65,15 @@ public class LineUpTarget extends CommandBase {
       m_Drivetrain.ArcDrive(drive_cmd,steer_cmd);
       }else{
         EndNow = true;
-        m_Drivetrain.Go(0, 0, 0);
+        m_Drivetrain.Go(0, 0, 0,false);
       }
     }else if(TargetDetected == 0){
-      m_Drivetrain.Go(0, 0, 1);
+      m_Drivetrain.Go(0, 0, 1,false);
     }
   }
   @Override
   public void end(boolean interrupted) {
-    m_Drivetrain.Go(0, 0, 0);
+    m_Drivetrain.Go(0, 0, 0,false);
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){
     Angle = Angle + LimelightAngle;

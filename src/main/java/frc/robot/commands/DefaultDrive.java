@@ -15,15 +15,17 @@ public class DefaultDrive extends CommandBase {
   private final DoubleSupplier m_rightTrigger;
   private final DoubleSupplier m_leftTrigger;
   private final DoubleSupplier m_leftStickAxis;
+  private final Boolean m_CutoffSpinnerSwitchThing;
   /**
    * Creates a new DefaultDrive.
    */
-  public DefaultDrive(Drivetrain subsystem,DoubleSupplier rightTrigger, DoubleSupplier leftTrigger, DoubleSupplier leftStickAxis) {
+  public DefaultDrive(Drivetrain subsystem,DoubleSupplier rightTrigger, DoubleSupplier leftTrigger, DoubleSupplier leftStickAxis,boolean CutoffSpinnerSwitchThing) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Drivetrain = subsystem;
     m_rightTrigger = rightTrigger;
     m_leftTrigger = leftTrigger;
     m_leftStickAxis = leftStickAxis;
+    m_CutoffSpinnerSwitchThing = CutoffSpinnerSwitchThing;
     addRequirements(m_Drivetrain);
   }
 
@@ -35,13 +37,13 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Drivetrain.Go(m_rightTrigger.getAsDouble(), m_leftTrigger.getAsDouble(), m_leftStickAxis.getAsDouble());
+    m_Drivetrain.Go(m_rightTrigger.getAsDouble(), m_leftTrigger.getAsDouble(), m_leftStickAxis.getAsDouble(),m_CutoffSpinnerSwitchThing);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Drivetrain.Go(0,0,0);
+    m_Drivetrain.Go(0,0,0,false);
   }
 
   // Returns true when the command should end.

@@ -38,7 +38,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     m_Drivetrain.setDefaultCommand(
-      new DefaultDrive(m_Drivetrain, () -> controller1.getRawAxis(3), () -> controller1.getRawAxis(2), () -> controller1.getRawAxis(0))
+      new DefaultDrive(m_Drivetrain, () -> controller1.getRawAxis(3), () -> controller1.getRawAxis(2), () -> controller1.getRawAxis(0),controller1.getRawButton(11))
     );
   }
   /**

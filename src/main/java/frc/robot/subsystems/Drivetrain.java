@@ -19,13 +19,40 @@ public class Drivetrain extends SubsystemBase {
   private Spark leftMotor = new Spark(Constants.DriveTrainLeftMotor1PWM);
   private Spark leftMotor2 = new Spark(Constants.DriveTrainLeftMotor2PWM);
   private DigitalInput SpinnerSwitch = new DigitalInput(4);
+  private Boolean CutOffWithSwitch;
   public Drivetrain() {
   }
-public void Go(double rightTrigger,double leftTrigger,double leftStickAxis){
+public void Go(double rightTrigger,double leftTrigger,double leftStickAxis,Boolean CutOffWithSwitch){
   double triggerVal;
   triggerVal = (rightTrigger - leftTrigger);
-  //replace true with SpinnerSwitch.get()
-  if(true == true){
+  if(CutOffWithSwitch){
+    //replace true with SpinnerSwitch.get()
+    if(SpinnerSwitch.get() == true){
+      if(triggerVal != 0 ){
+        leftMotor.set(triggerVal + leftStickAxis);
+        leftMotor2.set(triggerVal + leftStickAxis);
+        rightMotor.set(-1 * (triggerVal - leftStickAxis));
+        rightMotor2.set(-1 * (triggerVal - leftStickAxis));
+      }else{
+        leftMotor.set(0.5*(triggerVal + leftStickAxis));
+        leftMotor2.set(0.5*(triggerVal + leftStickAxis));
+        rightMotor.set(-0.5*(triggerVal - leftStickAxis));
+        rightMotor2.set(-0.5*(triggerVal - leftStickAxis));
+      }
+    }else{
+      if(triggerVal < 0){
+        leftMotor.set(0.5*(triggerVal + leftStickAxis));
+        leftMotor2.set(0.5*(triggerVal + leftStickAxis));
+        rightMotor.set(-0.5*(triggerVal - leftStickAxis));
+        rightMotor2.set(-0.5*(triggerVal - leftStickAxis));
+      }else{
+        leftMotor.set(0);
+        leftMotor2.set(0);
+        rightMotor.set(0);
+        rightMotor2.set(0);
+      }
+    }    
+  }else{
     if(triggerVal != 0 ){
       leftMotor.set(triggerVal + leftStickAxis);
       leftMotor2.set(triggerVal + leftStickAxis);
@@ -36,18 +63,6 @@ public void Go(double rightTrigger,double leftTrigger,double leftStickAxis){
       leftMotor2.set(0.5*(triggerVal + leftStickAxis));
       rightMotor.set(-0.5*(triggerVal - leftStickAxis));
       rightMotor2.set(-0.5*(triggerVal - leftStickAxis));
-    }
-  }else{
-    if(triggerVal < 0){
-      leftMotor.set(0.5*(triggerVal + leftStickAxis));
-      leftMotor2.set(0.5*(triggerVal + leftStickAxis));
-      rightMotor.set(-0.5*(triggerVal - leftStickAxis));
-      rightMotor2.set(-0.5*(triggerVal - leftStickAxis));
-    }else{
-      leftMotor.set(0);
-      leftMotor2.set(0);
-      rightMotor.set(0);
-      rightMotor2.set(0);
     }
   }
 }
@@ -64,7 +79,5 @@ public void ArcDrive(double GoSpeed, double Turn){
 }
 @Override
 public void periodic() {
-  //encoder.setDistancePerPulse(10);
-  //System.out.println("Arm Encoder: " +encoder.getDistance());
 }
 }

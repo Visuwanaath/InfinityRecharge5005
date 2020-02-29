@@ -30,7 +30,6 @@ public class ChuccPID extends PIDSubsystem {
         //0.19 - P
         encoder1.setDistancePerPulse(0.001);
         m_controller.setTolerance(0.1);
-
   }
   @Override
   public double getMeasurement() {

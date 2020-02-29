@@ -17,13 +17,13 @@ package frc.robot;
  */
 public final class Constants {
     public static int DriveTrainLeftMotor1PWM = 0;
-    public static int DriveTrainLeftMotor2PWM = 1;
-    public static int DriveTrainRightMotor1PWM = 2;
-    public static int DriveTrainRightMotor2PWM = 3;
-    public static int ShooterLeftPWM = 9;
+    public static int DriveTrainLeftMotor2PWM = 5;
+    public static int DriveTrainRightMotor1PWM = 3;
+    public static int DriveTrainRightMotor2PWM = 9;
+    public static int ShooterLeftPWM = 7;
     public static int ShooterRightPWM = 8;
-    public static int FeederPWM = 4;
-    public static int LoaderPWM = 5;
-    public static int SpinnerArmPWM = 7;
-    public static int ClimberPWM = 6;
+    public static int FeederPWM = 1;
+    public static int LoaderPWM = 4;
+    public static int SpinnerArmPWM = 6;
+    public static int ClimberPWM = 2;
 }

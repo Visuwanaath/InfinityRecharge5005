@@ -19,20 +19,19 @@ public class Drivetrain extends SubsystemBase {
   private Spark leftMotor = new Spark(Constants.DriveTrainLeftMotor1PWM);
   private Spark leftMotor2 = new Spark(Constants.DriveTrainLeftMotor2PWM);
   private DigitalInput SpinnerSwitch = new DigitalInput(4);
-  private Boolean CutOffWithSwitch;
   public Drivetrain() {
   }
 public void Go(double rightTrigger,double leftTrigger,double leftStickAxis,Boolean CutOffWithSwitch){
   double triggerVal;
   triggerVal = (rightTrigger - leftTrigger);
-  if(CutOffWithSwitch){
-    //replace true with SpinnerSwitch.get()
+  if(CutOffWithSwitch == true){
+    System.out.println(SpinnerSwitch.get());
     if(SpinnerSwitch.get() == true){
       if(triggerVal != 0 ){
-        leftMotor.set(triggerVal + leftStickAxis);
-        leftMotor2.set(triggerVal + leftStickAxis);
-        rightMotor.set(-1 * (triggerVal - leftStickAxis));
-        rightMotor2.set(-1 * (triggerVal - leftStickAxis));
+        leftMotor.set(0.2*(triggerVal + leftStickAxis));
+        leftMotor2.set(0.2* (triggerVal + leftStickAxis));
+        rightMotor.set(-0.2 * (triggerVal - leftStickAxis));
+        rightMotor2.set(-0.2 * (triggerVal - leftStickAxis));
       }else{
         leftMotor.set(0.5*(triggerVal + leftStickAxis));
         leftMotor2.set(0.5*(triggerVal + leftStickAxis));

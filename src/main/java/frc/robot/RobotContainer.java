@@ -38,7 +38,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     m_Drivetrain.setDefaultCommand(
-      new DefaultDrive(m_Drivetrain, () -> controller1.getRawAxis(3), () -> controller1.getRawAxis(2), () -> controller1.getRawAxis(0),controller1.getRawButton(11))
+      new DefaultDrive(m_Drivetrain, () -> controller1.getRawAxis(3), () -> controller1.getRawAxis(2), () -> controller1.getRawAxis(0),controller1.getRawButton(9))
     );
   }
   /**
@@ -51,12 +51,11 @@ public class RobotContainer {
     new JoystickButton(controller1,4).whenPressed(new SpinForRotations(m_Spinner,() -> 30));
     new JoystickButton(controller1,3).whenPressed(new SpinUntilColor(m_Spinner));
     new JoystickButton(controller1,2).whileHeld(new LineUpTarget(m_Drivetrain,false));
-    new JoystickButton(controller1,6).whenPressed(new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro,m_Zucc,m_ChuccPID,m_ChuccPID2));
+    //new JoystickButton(controller1,6).whenPressed(new TestGroup(m_Drivetrain,m_Feeder,m_Chucc,m_Gyro,m_Zucc,m_ChuccPID,m_ChuccPID2));
     new JoystickButton(controller1,5).whileHeld(new ChuccBall(m_Chucc, true, m_ChuccPID,m_ChuccPID2));
     new JoystickButton(controller1,8).whileHeld(new FeedBall(m_Feeder, () ->-1, true));
-    new JoystickButton(controller1,9).whileHeld(new ZuccBall(m_Zucc, ()->-0.75, true));
+    new JoystickButton(controller1,6).whileHeld(new ZuccBall(m_Zucc, ()->-0.75, true));
     new JoystickButton(controller1,10).whileHeld(new Climb(()->controller1.getRawAxis(5), m_Climber));
-    //new JoystickButton(controller1,9).whenPressed(new ChuccBall(m_Chucc, true, m_ChuccPID,m_ChuccPID2).withTimeout(1));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -48,26 +48,30 @@ public class ChuccBall extends CommandBase {
       SpeedToSendToPID = 63.5;
       //Set Left Shooter Speed
       if(m_ChuccPID.isEnabled() == false){
-        m_ChuccPID.enable();
+        //m_ChuccPID.enable();
       }
       m_ChuccPID.setSetpoint(-1*SpeedToSendToPID);
       //Set Right Shooter Speed
       if(m_ChuccPID2.isEnabled() == false){
-        m_ChuccPID2.enable();
+        //m_ChuccPID2.enable();
       }
       m_ChuccPID2.setSetpoint(SpeedToSendToPID);
+      m_ChuccPID.ChuccBallLeft(-0.6);
+      m_ChuccPID2.ChuccBallRight(0.6);
     }else{
       SpeedToSendToPID = 10;
       //Set Left Shooter Speed
       if(m_ChuccPID.isEnabled() == false){
-        m_ChuccPID.enable();
+        //m_ChuccPID.enable();
       }
       m_ChuccPID.setSetpoint(-1*SpeedToSendToPID);
       //Set Right Shooter Speed
       if(m_ChuccPID2.isEnabled() == false){
-        m_ChuccPID2.enable();
+        //m_ChuccPID2.enable();
       }
       m_ChuccPID2.setSetpoint(SpeedToSendToPID);
+      m_ChuccPID.ChuccBallLeft(-0.6);
+      m_ChuccPID2.ChuccBallRight(0.6);
     }
   }
   public double GetDistance(double LimeHeight,double TargetHeight, double Angle,double LimelightAngle){

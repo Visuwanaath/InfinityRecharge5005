@@ -10,16 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
+import java.util.function.BooleanSupplier;
 public class DefaultDrive extends CommandBase {
   private final Drivetrain m_Drivetrain;
   private final DoubleSupplier m_rightTrigger;
   private final DoubleSupplier m_leftTrigger;
   private final DoubleSupplier m_leftStickAxis;
-  private final Boolean m_CutoffSpinnerSwitchThing;
+  private final BooleanSupplier m_CutoffSpinnerSwitchThing;
   /**
    * Creates a new DefaultDrive.
    */
-  public DefaultDrive(Drivetrain subsystem,DoubleSupplier rightTrigger, DoubleSupplier leftTrigger, DoubleSupplier leftStickAxis,boolean CutoffSpinnerSwitchThing) {
+  public DefaultDrive(Drivetrain subsystem,DoubleSupplier rightTrigger, DoubleSupplier leftTrigger, DoubleSupplier leftStickAxis,BooleanSupplier CutoffSpinnerSwitchThing) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Drivetrain = subsystem;
     m_rightTrigger = rightTrigger;
@@ -37,7 +38,7 @@ public class DefaultDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Drivetrain.Go(m_rightTrigger.getAsDouble(), m_leftTrigger.getAsDouble(), m_leftStickAxis.getAsDouble(),m_CutoffSpinnerSwitchThing);
+    m_Drivetrain.Go(m_rightTrigger.getAsDouble(), m_leftTrigger.getAsDouble(), m_leftStickAxis.getAsDouble(),m_CutoffSpinnerSwitchThing.getAsBoolean());
   }
 
   // Called once the command ends or is interrupted.

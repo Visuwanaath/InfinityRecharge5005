@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -22,8 +23,8 @@ public class Spinner extends SubsystemBase {
   private final ColorMatch m_colorMatcher = new ColorMatch();
   public static final Color kBlueTarget = ColorMatch.makeColor(0.206, 0.460, 0.329);
   public static final Color kGreenTarget = ColorMatch.makeColor(0.196, 0.557, 0.246);
-  public static final Color kRedTarget = ColorMatch.makeColor(0.475, 0.371, 0.153);
-  public static final Color kYellowTarget = ColorMatch.makeColor(0.293, 0.561, 0.144);
+  public static final Color kRedTarget = ColorMatch.makeColor(0.291260, 0.496094, 0.212646);
+  public static final Color kYellowTarget = ColorMatch.makeColor(0.304199, 0.507080, 0.188721);
   private Color detectedColor;
   private String colorString;
   ColorMatchResult match;
@@ -32,7 +33,7 @@ public class Spinner extends SubsystemBase {
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
-    m_colorMatcher.setConfidenceThreshold(0.80);
+    m_colorMatcher.setConfidenceThreshold(0.95);
   }
   public void setArmSpeed(double speed){
     spinnerArm.set(speed);

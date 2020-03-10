@@ -32,7 +32,8 @@ public class LineUpTarget extends CommandBase {
     m_Drivetrain = subsystem;
     addRequirements(m_Drivetrain);
     m_DriveToDistance = DriveToDistance;
-    STEER_K = 0.05;                    // how hard to turn toward the target
+    //was 0.07
+    STEER_K = 0.0725;                    // how hard to turn toward the target
     DRIVE_K = 0.07;                    // how hard to drive fwd toward the target
     //DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
     MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast

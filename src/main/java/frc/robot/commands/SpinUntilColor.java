@@ -34,9 +34,8 @@ public class SpinUntilColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  double spinSpeed = 0.5;
+  double spinSpeed = 0.25;
   currentColor = m_Spinner.getColorString();
-  if(currentColor.equals("NoU") == false){
     if(gameData.equals("B")){
       if(currentColor.equals("Red") == false){
         m_Spinner.setArmSpeed(spinSpeed);
@@ -69,10 +68,6 @@ public class SpinUntilColor extends CommandBase {
       End = true;
       m_Spinner.setArmSpeed(0);
     }
-  }else{
-    End = true;
-    m_Spinner.setArmSpeed(0);
-  }
   }
   // Called once the command ends or is interrupted.
   @Override
